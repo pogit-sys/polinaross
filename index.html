@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Polina S. Ross</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #fafaf9;
+      --surface: #ffffff;
+      --text: #1a1a1a;
+      --muted: #6b7280;
+      --accent: #2d5a8e;
+      --border: #e5e7eb;
+      --radius: 12px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111110;
+        --surface: #1c1c1b;
+        --text: #f0ede8;
+        --muted: #9ca3af;
+        --accent: #7aaddd;
+        --border: #2e2e2c;
+      }
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 64px 24px 80px;
+    }
+
+    /* ── Header ── */
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      margin-bottom: 40px;
+    }
+
+    .avatar {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2d5a8e 0%, #5b8dc9 100%);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: 600;
+      color: white;
+      letter-spacing: -1px;
+    }
+
+    .profile-text h1 {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+    }
+
+    .profile-text p {
+      color: var(--muted);
+      margin-top: 4px;
+      font-size: 14px;
+    }
+
+    .badge {
+      display: inline-block;
+      margin-top: 8px;
+      background: color-mix(in srgb, var(--accent) 12%, transparent);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 2px 10px;
+      border-radius: 20px;
+    }
+
+    /* ── Section ── */
+    section {
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    /* ── Bio ── */
+    .bio p {
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    /* ── Resume ── */
+    .resume-entry {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 4px 12px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .resume-entry:last-child { border-bottom: none; }
+
+    .resume-entry .role {
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .resume-entry .company {
+      color: var(--accent);
+      font-size: 13px;
+      grid-column: 1;
+    }
+
+    .resume-entry .date {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: right;
+      grid-row: 1 / span 2;
+      grid-column: 2;
+      align-self: start;
+      padding-top: 1px;
+      white-space: nowrap;
+    }
+
+    .resume-entry .desc {
+      grid-column: 1 / -1;
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 6px;
+      line-height: 1.65;
+    }
+
+    /* Education sub-section */
+    .edu-list {
+      list-style: none;
+    }
+
+    .edu-list li {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    .edu-list li:last-child { border-bottom: none; }
+
+    .edu-list .degree { font-weight: 600; }
+    .edu-list .school { color: var(--accent); font-size: 13px; }
+    .edu-list .year { color: var(--muted); font-size: 12px; }
+
+    /* ── Contact ── */
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .contact-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 500;
+      background: var(--surface);
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .contact-links a:hover {
+      border-color: var(--accent);
+      background: color-mix(in srgb, var(--accent) 12%, transparent);
+      color: var(--accent);
+    }
+
+    .contact-links a svg {
+      width: 15px;
+      height: 15px;
+      opacity: 0.7;
+    }
+
+    /* ── Divider ── */
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 40px 0;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 480px) {
+      .profile { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .resume-entry { grid-template-columns: 1fr; }
+      .resume-entry .date { grid-row: auto; grid-column: 1; text-align: left; margin-top: 2px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Profile Header -->
+    <div class="profile">
+      <div class="avatar">PR</div>
+      <div class="profile-text">
+        <h1>Polina S. Ross</h1>
+        <p>Senior Counsel &middot; Fintech &amp; Insurance</p>
+        <span class="badge">Licensed in NY &middot; NJ &middot; PA</span>
+      </div>
+    </div>
+
+    <!-- Bio -->
+    <section class="bio">
+      <h2>About</h2>
+      <p>
+        Senior in-house counsel with deep experience in fintech, insurance, and financial services.
+        I partner with business, product, and compliance teams to launch innovative financial products
+        &mdash; from travel insurance and parametric offerings to robo-advisor platforms and asset
+        management tools. I specialize in translating complex regulatory landscapes into clear,
+        actionable guidance that drives growth while managing risk.
+      </p>
+    </section>
+
+    <hr />
+
+    <!-- Resume -->
+    <section>
+      <h2>Experience</h2>
+
+      <div class="resume-entry">
+        <div class="role">Senior Counsel, Aircover</div>
+        <div class="date">2023 &ndash; Present</div>
+        <div class="company">Airbnb &middot; Remote</div>
+        <p class="desc">
+          Lead attorney for Airbnb's US travel insurance program. Spearheaded launch of 15+ SKU product
+          variations enabling $140M+ in revenue. Developed legal framework for Host Earnings Protection,
+          Airbnb's first paid parametric product. Advise on AI, cybersecurity, and emerging state
+          financial regulations.
+        </p>
+      </div>
+
+      <div class="resume-entry">
+        <div class="role">Vice President, Corporate Counsel</div>
+        <div class="date">2018 &ndash; 2023</div>
+        <div class="company">Prudential Insurance &middot; Newark, NJ</div>
+        <p class="desc">
+          Trusted counsel to senior leaders across retail broker-dealer and asset management businesses.
+          Coordinated launch of proprietary asset management portfolios and advised on Prudential's $6B
+          hybrid robo-advisor platform. Oversaw a team of 50 on Department of Labor fiduciary rule
+          implementation across four business lines.
+        </p>
+      </div>
+
+      <div class="resume-entry">
+        <div class="role">Associate</div>
+        <div class="date">2014 &ndash; 2018</div>
+        <div class="company">Skadden, Arps, Slate, Meagher &amp; Flom &middot; New York City</div>
+        <p class="desc">
+          Advised public and private companies, executives, and boards on M&amp;A transactions.
+          Seconded to Credit Suisse (2017) to advise on GDPR, APAC data protection, and QPAM
+          exemption compliance for institutional asset management.
+        </p>
+      </div>
+
+      <div class="resume-entry">
+        <div class="role">Associate</div>
+        <div class="date">2012 &ndash; 2014</div>
+        <div class="company">Morgan, Lewis &amp; Bockius &middot; Philadelphia</div>
+        <p class="desc">
+          Practice focused on litigation and regulatory inquiries.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Education</h2>
+      <ul class="edu-list">
+        <li>
+          <div class="degree">J.D.</div>
+          <div class="school">Cornell Law School</div>
+          <div class="year">2012 &middot; Journal of Law and Public Policy, Acquisitions Editor</div>
+        </li>
+        <li>
+          <div class="degree">B.S. Industrial and Labor Relations</div>
+          <div class="school">Cornell University</div>
+          <div class="year">2008 &middot; Minor in International Relations</div>
+        </li>
+      </ul>
+    </section>
+
+    <hr />
+
+    <!-- Contact -->
+    <section>
+      <h2>Contact</h2>
+      <div class="contact-links">
+
+        <a href="mailto:polina.s.ross@gmail.com">
+          <!-- Email icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+          </svg>
+          polina.s.ross@gmail.com
+        </a>
+
+        <a href="tel:5854724143">
+          <!-- Phone icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.25h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l1.87-1.87a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          585.472.4143
+        </a>
+
+        <a href="https://www.linkedin.com/in/polinaross" target="_blank" rel="noopener">
+          <!-- LinkedIn icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+            <rect x="2" y="9" width="4" height="12"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
+          LinkedIn
+        </a>
+
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>
