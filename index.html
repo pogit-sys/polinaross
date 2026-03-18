@@ -6,381 +6,582 @@
   <title>Polina S. Ross</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #fdf7f5;
-      --surface: #ffffff;
-      --text: #1a1118;
-      --muted: #7c6e78;
-      --accent: #c9627a;
-      --accent-light: #f9eaed;
-      --border: #ede5e2;
-      --shadow: 0 2px 16px rgba(180,100,120,0.07);
-      --shadow-hover: 0 6px 28px rgba(180,100,120,0.13);
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #140f11;
-        --surface: #1f181a;
-        --text: #f5eeeb;
-        --muted: #9e8e8a;
-        --accent: #e8839a;
-        --accent-light: #2e1a1f;
-        --border: #2e2228;
-        --shadow: 0 2px 16px rgba(0,0,0,0.3);
-        --shadow-hover: 0 6px 28px rgba(0,0,0,0.4);
-      }
+      --bg: #0c0c0c;
+      --surface: #141414;
+      --surface2: #1a1a1a;
+      --text: #f2efea;
+      --muted: #888480;
+      --subtle: #3a3835;
+      --accent: #e8543e;
+      --accent-dim: rgba(232, 84, 62, 0.12);
+      --border: rgba(255,255,255,0.07);
+      --nav-h: 68px;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: "DM Sans", -apple-system, sans-serif;
+      font-family: "Outfit", -apple-system, sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
       font-size: 15px;
+      overflow-x: hidden;
     }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 3rem;
+      background: rgba(12,12,12,0.75);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+    }
+
+    .nav-name {
+      font-family: "Playfair Display", serif;
+      font-size: 18px;
+      letter-spacing: 0.01em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
 
     /* ── Hero ── */
     .hero {
-      background: linear-gradient(145deg, #f2c4ce 0%, #f9ddd5 50%, #fde8c8 100%);
-      padding: 72px 24px 80px;
-      text-align: center;
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: var(--nav-h);
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem 4rem 6rem 3rem;
+    }
+
+    .hero-eyebrow {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.2s forwards;
+    }
+
+    .hero-title {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.4s forwards;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    .hero-bio {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.6s forwards;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.8s forwards;
+    }
+
+    .badge {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--subtle);
+      border-radius: 4px;
+      padding: 5px 10px;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.7s 1s forwards;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 28px;
+      background: var(--accent);
+      color: #fff;
+      font-family: "Outfit", sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: opacity 0.2s, transform 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 28px;
+      background: transparent;
+      color: var(--text);
+      font-family: "Outfit", sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 6px;
+      border: 1px solid var(--subtle);
+      transition: border-color 0.2s, color 0.2s;
+      cursor: pointer;
+    }
+
+    .btn-secondary:hover { border-color: var(--text); }
+
+    /* ── Hero right (avatar panel) ── */
+    .hero-right {
       position: relative;
       overflow: hidden;
     }
 
-    @media (prefers-color-scheme: dark) {
-      .hero {
-        background: linear-gradient(145deg, #3a1a22 0%, #2e1820 50%, #281510 100%);
-      }
-    }
-
-    .hero::before {
+    .hero-right::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at 70% 20%, rgba(255,255,255,0.25) 0%, transparent 60%);
-      pointer-events: none;
+      background: linear-gradient(to right, var(--bg) 0%, transparent 35%);
+      z-index: 2;
     }
 
-    .avatar {
-      width: 108px;
-      height: 108px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #c9627a 0%, #e89aaa 100%);
-      margin: 0 auto 20px;
+    .hero-right::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, var(--bg) 0%, transparent 40%);
+      z-index: 2;
+    }
+
+    .hero-avatar-wrap {
+      position: absolute;
+      inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: "DM Serif Display", serif;
-      font-size: 36px;
-      color: white;
-      box-shadow: 0 0 0 4px rgba(255,255,255,0.6), 0 8px 32px rgba(180,80,100,0.25);
-      position: relative;
       z-index: 1;
     }
 
-    .hero h1 {
-      font-family: "DM Serif Display", serif;
-      font-size: clamp(32px, 6vw, 48px);
-      font-weight: 400;
-      letter-spacing: -0.5px;
-      color: #2a1018;
-      position: relative;
-      z-index: 1;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      .hero h1 { color: #f5eeeb; }
-    }
-
-    .hero .tagline {
-      margin-top: 8px;
-      font-size: 15px;
-      font-weight: 400;
-      color: #6b3545;
-      position: relative;
-      z-index: 1;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      .hero .tagline { color: #c9a0aa; }
-    }
-
-    .hero .badge {
-      display: inline-block;
-      margin-top: 16px;
-      background: rgba(255,255,255,0.55);
-      color: #8b3a50;
-      font-size: 12px;
-      font-weight: 500;
-      padding: 5px 14px;
-      border-radius: 20px;
-      backdrop-filter: blur(4px);
-      position: relative;
-      z-index: 1;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      .hero .badge {
-        background: rgba(255,255,255,0.08);
-        color: #e8a0b0;
-      }
-    }
-
-    /* ── Nav dots ── */
-    .nav {
+    .hero-avatar {
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2a1a14 0%, #3d2218 50%, #1a0e09 100%);
+      border: 1px solid rgba(232,84,62,0.2);
       display: flex;
+      align-items: center;
       justify-content: center;
-      gap: 6px;
-      margin-top: 32px;
-      position: relative;
-      z-index: 1;
+      box-shadow: 0 0 80px rgba(232,84,62,0.08), 0 0 160px rgba(232,84,62,0.04);
     }
 
-    .nav a {
-      padding: 6px 18px;
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: 500;
-      text-decoration: none;
-      color: #6b3545;
-      background: rgba(255,255,255,0.45);
-      backdrop-filter: blur(4px);
-      transition: background 0.2s, color 0.2s;
+    .hero-monogram {
+      font-family: "Playfair Display", serif;
+      font-size: 72px;
+      font-weight: 400;
+      color: rgba(232,84,62,0.6);
+      letter-spacing: -2px;
     }
 
-    @media (prefers-color-scheme: dark) {
-      .nav a { color: #e8a0b0; background: rgba(255,255,255,0.07); }
-    }
-
-    .nav a:hover {
-      background: rgba(255,255,255,0.75);
-      color: #8b3a50;
-    }
-
-    /* ── Main content ── */
-    .main {
-      max-width: 740px;
+    /* ── Section wrapper ── */
+    .section {
+      padding: 7rem 3rem;
+      border-top: 1px solid var(--border);
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 56px 24px 80px;
     }
 
-    /* ── Section header ── */
+    .section-inner {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 4rem;
+    }
+
     .section-label {
+      font-family: "JetBrains Mono", monospace;
       font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
+      font-weight: 500;
       letter-spacing: 0.1em;
+      text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 20px;
+      padding-top: 4px;
     }
 
-    section { margin-bottom: 56px; }
-
-    /* ── Bio card ── */
-    .bio-card {
-      background: var(--surface);
-      border-radius: 20px;
-      padding: 32px 36px;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border);
-    }
-
-    .bio-card p {
-      font-size: 16px;
-      line-height: 1.8;
-      color: var(--text);
-      font-weight: 300;
-    }
-
-    .bio-card p strong {
-      font-weight: 600;
-      color: var(--accent);
-    }
-
-    /* ── Experience cards ── */
-    .experience-list {
+    /* ── Experience ── */
+    .exp-list {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 0;
     }
 
-    .exp-card {
+    .exp-item {
+      padding: 2rem 2rem;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      transition: background 0.25s, border-color 0.25s, transform 0.25s;
+      position: relative;
+    }
+
+    .exp-item::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 10px 10px 0 0;
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .exp-item:hover {
       background: var(--surface);
-      border-radius: 18px;
-      padding: 24px 28px;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border);
-      transition: box-shadow 0.2s, transform 0.2s;
-    }
-
-    .exp-card:hover {
-      box-shadow: var(--shadow-hover);
+      border-color: var(--border);
       transform: translateY(-2px);
     }
 
-    .exp-header {
+    .exp-item:hover::before { opacity: 1; }
+
+    .exp-meta {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      gap: 12px;
+      gap: 1rem;
       margin-bottom: 4px;
     }
 
     .exp-role {
-      font-size: 15px;
+      font-family: "Playfair Display", serif;
+      font-size: 17px;
       font-weight: 600;
+      color: var(--text);
     }
 
     .exp-date {
-      font-size: 12px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
       color: var(--muted);
       white-space: nowrap;
-      padding-top: 2px;
+      padding-top: 4px;
     }
 
     .exp-company {
       font-size: 13px;
       color: var(--accent);
       font-weight: 500;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     .exp-desc {
-      font-size: 13px;
+      font-size: 14px;
       color: var(--muted);
-      line-height: 1.7;
+      line-height: 1.75;
+      font-weight: 300;
     }
 
     /* ── Education ── */
     .edu-list {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 1.5rem;
       list-style: none;
     }
 
-    .edu-card {
-      background: var(--surface);
-      border-radius: 16px;
-      padding: 20px 24px;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
+    .edu-item {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      gap: 12px;
+      align-items: flex-start;
+      gap: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
     }
 
-    .edu-degree { font-size: 14px; font-weight: 600; }
-    .edu-school { font-size: 13px; color: var(--accent); font-weight: 500; margin-top: 2px; }
-    .edu-year { font-size: 12px; color: var(--muted); text-align: right; white-space: nowrap; }
+    .edu-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .edu-degree {
+      font-family: "Playfair Display", serif;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .edu-school {
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .edu-detail {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      color: var(--muted);
+      text-align: right;
+      line-height: 1.7;
+      white-space: nowrap;
+    }
 
     /* ── Contact ── */
-    .contact-grid {
+    .contact-wrap {
       display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
+      flex-direction: column;
+      gap: 2rem;
     }
 
-    .contact-grid a {
+    .contact-intro {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 520px;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .contact-links a {
       display: inline-flex;
       align-items: center;
       gap: 9px;
-      padding: 12px 20px;
-      border-radius: 14px;
-      text-decoration: none;
+      padding: 12px 22px;
+      border-radius: 6px;
       font-size: 13px;
       font-weight: 500;
-      background: var(--surface);
+      text-decoration: none;
+      border: 1px solid var(--subtle);
       color: var(--text);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      transition: all 0.2s;
+      background: transparent;
+      transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
     }
 
-    .contact-grid a:hover {
-      background: var(--accent-light);
+    .contact-links a:hover {
+      background: var(--surface2);
       border-color: var(--accent);
       color: var(--accent);
-      box-shadow: var(--shadow-hover);
       transform: translateY(-1px);
     }
 
-    .contact-grid a svg {
-      width: 16px;
-      height: 16px;
-      opacity: 0.75;
+    .contact-links a.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .contact-links a.primary:hover {
+      opacity: 0.88;
+      color: #fff;
+    }
+
+    .contact-links a svg {
+      width: 15px;
+      height: 15px;
+      opacity: 0.8;
     }
 
     /* ── Footer ── */
     footer {
-      text-align: center;
-      padding: 24px;
-      font-size: 12px;
-      color: var(--muted);
       border-top: 1px solid var(--border);
+      padding: 2.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .footer-name {
+      font-family: "Playfair Display", serif;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .footer-copy {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      color: var(--subtle);
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* ── Responsive ── */
-    @media (max-width: 520px) {
-      .bio-card { padding: 24px 20px; }
-      .exp-card { padding: 20px; }
-      .exp-header { flex-direction: column; gap: 2px; }
-      .edu-card { flex-direction: column; align-items: flex-start; }
-      .edu-year { text-align: left; }
-      .nav { flex-wrap: wrap; }
+    @media (max-width: 1024px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-right { display: none; }
+      .hero-left { padding: 5rem 2rem; }
+      .section-inner { grid-template-columns: 1fr; gap: 2rem; }
+      nav { padding: 0 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+    }
+
+    @media (max-width: 600px) {
+      .section { padding: 4rem 1.5rem; }
+      .exp-meta { flex-direction: column; gap: 4px; }
+      .edu-item { flex-direction: column; gap: 8px; }
+      .edu-detail { text-align: left; }
+      nav { padding: 0 1rem; }
+      .nav-links { display: none; }
+      footer { flex-direction: column; gap: 8px; text-align: center; }
     }
   </style>
 </head>
 <body>
 
+  <!-- Nav -->
+  <nav>
+    <a class="nav-name" href="#">Polina S. Ross</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
   <!-- Hero -->
-  <header class="hero">
-    <div class="avatar">PR</div>
-    <h1>Polina S. Ross</h1>
-    <p class="tagline">Senior Counsel &middot; Fintech &amp; Insurance</p>
-    <span class="badge">Licensed in NY &middot; NJ &middot; PA</span>
-    <nav class="nav">
-      <a href="#about">About</a>
-      <a href="#experience">Experience</a>
-      <a href="#education">Education</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Senior Counsel &middot; NY &middot; NJ &middot; PA</p>
+      <h1 class="hero-title">Polina<br/><em>S. Ross</em></h1>
+      <p class="hero-bio">
+        In-house counsel with deep expertise in fintech, insurance, and financial services.
+        I help companies build innovative products — from travel insurance to robo-advisors —
+        while navigating complex regulatory landscapes with clarity and confidence.
+      </p>
+      <div class="hero-badges">
+        <span class="badge">Fintech</span>
+        <span class="badge">Insurance</span>
+        <span class="badge">M&amp;A</span>
+        <span class="badge">Asset Management</span>
+        <span class="badge">Regulatory</span>
+      </div>
+      <div class="hero-cta">
+        <a class="btn-primary" href="mailto:polina.s.ross@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+          Get in Touch
+        </a>
+        <a class="btn-secondary" href="https://www.linkedin.com/in/polinasross" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-avatar-wrap">
+        <div class="hero-avatar">
+          <span class="hero-monogram">PR</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <main class="main">
-
-    <!-- About -->
-    <section id="about">
+  <!-- About -->
+  <div id="about" class="section">
+    <div class="section-inner reveal">
       <p class="section-label">About</p>
-      <div class="bio-card">
-        <p>
-          Senior in-house counsel with deep experience in <strong>fintech, insurance, and financial services</strong>.
-          I partner with business, product, and compliance teams to launch innovative financial products &mdash;
+      <div>
+        <p style="font-size:17px; font-weight:300; color:var(--muted); line-height:1.9; max-width:580px;">
+          Senior in-house counsel with deep experience in <span style="color:var(--text); font-weight:400;">fintech, insurance, and financial services</span>.
+          I partner with business, product, and compliance teams to launch innovative financial products —
           from travel insurance and parametric offerings to robo-advisor platforms and asset management tools.
           I specialize in translating complex regulatory landscapes into clear, actionable guidance that
           drives growth while managing risk.
         </p>
       </div>
-    </section>
+    </div>
+  </div>
 
-    <!-- Experience -->
-    <section id="experience">
+  <!-- Experience -->
+  <div id="experience" class="section">
+    <div class="section-inner reveal">
       <p class="section-label">Experience</p>
-      <div class="experience-list">
+      <div class="exp-list">
 
-        <div class="exp-card">
-          <div class="exp-header">
+        <div class="exp-item">
+          <div class="exp-meta">
             <div class="exp-role">Senior Counsel, Aircover</div>
-            <div class="exp-date">2023 &ndash; Present</div>
+            <div class="exp-date">2023 — Present</div>
           </div>
           <div class="exp-company">Airbnb &middot; Remote</div>
           <p class="exp-desc">
@@ -390,10 +591,10 @@
           </p>
         </div>
 
-        <div class="exp-card">
-          <div class="exp-header">
+        <div class="exp-item">
+          <div class="exp-meta">
             <div class="exp-role">Vice President, Corporate Counsel</div>
-            <div class="exp-date">2018 &ndash; 2023</div>
+            <div class="exp-date">2018 — 2023</div>
           </div>
           <div class="exp-company">Prudential Insurance &middot; Newark, NJ</div>
           <p class="exp-desc">
@@ -404,10 +605,10 @@
           </p>
         </div>
 
-        <div class="exp-card">
-          <div class="exp-header">
+        <div class="exp-item">
+          <div class="exp-meta">
             <div class="exp-role">Associate</div>
-            <div class="exp-date">2014 &ndash; 2018</div>
+            <div class="exp-date">2014 — 2018</div>
           </div>
           <div class="exp-company">Skadden, Arps, Slate, Meagher &amp; Flom &middot; New York City</div>
           <p class="exp-desc">
@@ -417,71 +618,85 @@
           </p>
         </div>
 
-        <div class="exp-card">
-          <div class="exp-header">
+        <div class="exp-item">
+          <div class="exp-meta">
             <div class="exp-role">Associate</div>
-            <div class="exp-date">2012 &ndash; 2014</div>
+            <div class="exp-date">2012 — 2014</div>
           </div>
           <div class="exp-company">Morgan, Lewis &amp; Bockius &middot; Philadelphia</div>
           <p class="exp-desc">
-            Practice focused on litigation and regulatory inquiries.
+            Practice focused on litigation and regulatory inquiries in financial services.
           </p>
         </div>
 
       </div>
-    </section>
+    </div>
+  </div>
 
-    <!-- Education -->
-    <section id="education">
+  <!-- Education -->
+  <div id="education" class="section">
+    <div class="section-inner reveal">
       <p class="section-label">Education</p>
       <ul class="edu-list">
-        <li class="edu-card">
+        <li class="edu-item">
           <div>
             <div class="edu-degree">J.D.</div>
             <div class="edu-school">Cornell Law School</div>
           </div>
-          <div class="edu-year">2012<br/>Journal of Law &amp; Public Policy<br/>Acquisitions Editor</div>
+          <div class="edu-detail">2012<br/>Journal of Law &amp; Public Policy<br/>Acquisitions Editor</div>
         </li>
-        <li class="edu-card">
+        <li class="edu-item">
           <div>
             <div class="edu-degree">B.S. Industrial &amp; Labor Relations</div>
             <div class="edu-school">Cornell University</div>
           </div>
-          <div class="edu-year">2008<br/>Minor in International Relations</div>
+          <div class="edu-detail">2008<br/>Minor in International Relations</div>
         </li>
       </ul>
-    </section>
+    </div>
+  </div>
 
-    <!-- Contact -->
-    <section id="contact">
+  <!-- Contact -->
+  <div id="contact" class="section">
+    <div class="section-inner reveal">
       <p class="section-label">Contact</p>
-      <div class="contact-grid">
-
-        <a href="https://www.linkedin.com/in/polinasross" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-            <rect x="2" y="9" width="4" height="12"/>
-            <circle cx="4" cy="4" r="2"/>
-          </svg>
-          Connect on LinkedIn
-        </a>
-
-        <a href="mailto:polina.s.ross@gmail.com">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="4" width="20" height="16" rx="2"/>
-            <polyline points="2,4 12,13 22,4"/>
-          </svg>
-          Email Me
-        </a>
-
+      <div class="contact-wrap">
+        <p class="contact-intro">
+          Open to senior in-house and advisory opportunities in fintech, insurtech, and financial services.
+          Feel free to reach out directly — I'd love to connect.
+        </p>
+        <div class="contact-links">
+          <a class="primary" href="mailto:polina.s.ross@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+            polina.s.ross@gmail.com
+          </a>
+          <a href="https://www.linkedin.com/in/polinasross" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+        </div>
       </div>
-    </section>
-
-  </main>
+    </div>
+  </div>
 
   <footer>
-    &copy; 2025 Polina S. Ross
+    <span class="footer-name">Polina S. Ross</span>
+    <span class="footer-copy">&copy; 2026</span>
   </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
 
 </body>
 </html>
