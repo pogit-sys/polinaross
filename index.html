@@ -16,9 +16,9 @@
       --surface2: #1a1a1a;
       --text: #f2efea;
       --muted: #888480;
-      --subtle: #3a3835;
-      --accent: #e8543e;
-      --accent-dim: rgba(232, 84, 62, 0.12);
+      --subtle: #2a3540;
+      --accent: #38bdf8;
+      --accent-dim: rgba(56, 189, 248, 0.12);
       --border: rgba(255,255,255,0.07);
       --nav-h: 68px;
     }
@@ -233,19 +233,19 @@
       width: 260px;
       height: 260px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #2a1a14 0%, #3d2218 50%, #1a0e09 100%);
-      border: 1px solid rgba(232,84,62,0.2);
+      background: linear-gradient(135deg, #0a1e2e 0%, #0d2d42 50%, #071520 100%);
+      border: 1px solid rgba(56,189,248,0.2);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 80px rgba(232,84,62,0.08), 0 0 160px rgba(232,84,62,0.04);
+      box-shadow: 0 0 80px rgba(56,189,248,0.08), 0 0 160px rgba(56,189,248,0.04);
     }
 
     .hero-monogram {
       font-family: "Playfair Display", serif;
       font-size: 72px;
       font-weight: 400;
-      color: rgba(232,84,62,0.6);
+      color: rgba(56,189,248,0.6);
       letter-spacing: -2px;
     }
 
@@ -385,6 +385,50 @@
       white-space: nowrap;
     }
 
+    /* ── Work With Me cards ── */
+    .work-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.75rem;
+      transition: border-color 0.25s, transform 0.25s, background 0.25s;
+      position: relative;
+    }
+
+    .work-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 10px 10px 0 0;
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .work-card:hover {
+      border-color: rgba(56,189,248,0.2);
+      background: var(--surface2);
+      transform: translateY(-2px);
+    }
+
+    .work-card:hover::before { opacity: 1; }
+
+    .work-card-title {
+      font-family: "Playfair Display", serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .work-card-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
     /* ── Contact ── */
     .contact-wrap {
       display: flex;
@@ -513,8 +557,10 @@
     <a class="nav-name" href="#">Polina S. Ross</a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
+      <li><a href="#background">Background</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#education">Education</a></li>
+      <li><a href="#work-with-me">Work With Me</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
@@ -567,6 +613,31 @@
           from travel insurance and parametric offerings to robo-advisor platforms and asset management tools.
           I specialize in translating complex regulatory landscapes into clear, actionable guidance that
           drives growth while managing risk.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Background -->
+  <div id="background" class="section">
+    <div class="section-inner reveal">
+      <p class="section-label">Background</p>
+      <div>
+        <p style="font-size:17px; font-weight:300; color:var(--muted); line-height:1.9; max-width:580px; margin-bottom:2rem;">
+          I grew up intellectually restless — drawn equally to people, systems, and the rules that hold them together.
+          That curiosity took me to <span style="color:var(--text); font-weight:400;">Cornell</span>, where I studied Industrial &amp; Labor Relations before going on to
+          Cornell Law School, where I served as Acquisitions Editor on the Journal of Law &amp; Public Policy.
+        </p>
+        <p style="font-size:17px; font-weight:300; color:var(--muted); line-height:1.9; max-width:580px; margin-bottom:2rem;">
+          I began my legal career in litigation and M&amp;A at <span style="color:var(--text); font-weight:400;">Morgan Lewis</span> and
+          <span style="color:var(--text); font-weight:400;">Skadden</span>, advising boards and executives through some of the most
+          complex transactions and regulatory challenges in financial services. A secondment to Credit Suisse in 2017
+          opened my eyes to the global intersection of technology, data privacy, and institutional finance.
+        </p>
+        <p style="font-size:17px; font-weight:300; color:var(--muted); line-height:1.9; max-width:580px;">
+          From there I moved in-house — first to <span style="color:var(--text); font-weight:400;">Prudential</span>, where I helped shape a $6B robo-advisor platform,
+          and then to <span style="color:var(--text); font-weight:400;">Airbnb</span>, where I built the legal infrastructure for one of the most innovative
+          travel insurance programs in the industry. I'm licensed in New York, New Jersey, and Pennsylvania.
         </p>
       </div>
     </div>
@@ -653,6 +724,43 @@
           <div class="edu-detail">2008<br/>Minor in International Relations</div>
         </li>
       </ul>
+    </div>
+  </div>
+
+  <!-- Work With Me -->
+  <div id="work-with-me" class="section">
+    <div class="section-inner reveal">
+      <p class="section-label">Work With Me</p>
+      <div>
+        <p style="font-size:17px; font-weight:300; color:var(--muted); line-height:1.9; max-width:580px; margin-bottom:3rem;">
+          I partner with companies at the intersection of finance, technology, and regulation — helping them move fast
+          without breaking things. Whether you're launching a new product, entering a new market, or navigating
+          a complex regulatory environment, I bring senior-level counsel with a builder's mindset.
+        </p>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
+
+          <div class="work-card">
+            <div class="work-card-title">Fractional GC</div>
+            <p class="work-card-desc">Senior legal leadership for fintech and insurtech companies that need experienced in-house counsel without the full-time commitment.</p>
+          </div>
+
+          <div class="work-card">
+            <div class="work-card-title">Product Counsel</div>
+            <p class="work-card-desc">End-to-end legal support for financial product launches — from regulatory analysis and licensing to contracts, disclosures, and go-to-market.</p>
+          </div>
+
+          <div class="work-card">
+            <div class="work-card-title">Regulatory Strategy</div>
+            <p class="work-card-desc">Clear, actionable guidance on state and federal financial regulations — insurance, broker-dealer, investment adviser, and emerging fintech frameworks.</p>
+          </div>
+
+          <div class="work-card">
+            <div class="work-card-title">M&amp;A &amp; Transactions</div>
+            <p class="work-card-desc">Legal advisory for acquisitions, partnerships, and strategic transactions in financial services — from diligence through close.</p>
+          </div>
+
+        </div>
+      </div>
     </div>
   </div>
 
